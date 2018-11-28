@@ -346,18 +346,21 @@ void DrawWalls(){
 
 void DrawBed(){
 
+    //Draw
     glPushMatrix();
     glScalef(6.0f, 1.0f, 10.0f);
     glTranslatef(0.0f, 3.0f, 0.0f);
     DrawShape(0, 1, 1);
     glPopMatrix();
 
+    //Draw
     glPushMatrix();
     glScalef(6.0f, 2.0f, 11.0f);
     glTranslatef( 0.0f, 1.0f, 0.0f );
     DrawShape(0, 1, 1);
     glPopMatrix();
 
+    //Draw
     glPushMatrix();
     glScalef(6.0f, 4.0f, 1.0f);
     glTranslatef(0.0f, 1.0f, -4.5f);
@@ -367,6 +370,7 @@ void DrawBed(){
 
 void DrawStand(){
 
+    //Draw legs
     glPushMatrix();
     glTranslatef(1.5f, 2.5f, 1.5f);
     glScalef(0.2f, 3.0f, 0.2f);
@@ -391,6 +395,7 @@ void DrawStand(){
     DrawShape(2, 100, 100);
     glPopMatrix();
 
+    //Draw top
     glPushMatrix();
     glTranslatef(0.0f, 5.0f, 0.0f);
     glScalef(3.0f, 0.25f, 3.0f);
@@ -406,18 +411,21 @@ void DrawStand(){
 
 void DrawFan(){
 
+    //Draw base
     glPushMatrix();
     glTranslatef(0.0f, 3.0f, 0.0f);
     glScalef(0.25f, 3.0f, 0.25f);
     DrawShape(2, 100, 100);
     glPopMatrix();
 
+    //Draw stand
     glPushMatrix();
     glTranslatef(0.0f, 0.5f, 0.0f);
     glScalef(1.0f, 0.5f, 1.0f);
     DrawShape(2, 100, 100);
     glPopMatrix();
 
+    //Draw blade mount
     glPushMatrix();
     glTranslatef(0.0f, 6.0f, 0.0f);
     glScalef(0.5f, 0.5f, 0.5f);
@@ -485,18 +493,21 @@ void DrawDrawers(){
 
 void DrawLamp(){
 
+    //Draw base
     glPushMatrix();
     glTranslatef(0.0f, 1.0f, 0.0f);
     glScalef(0.2f, 2.0f, 0.2f);
     DrawShape(2, 100, 100);
     glPopMatrix();
 
+    //Draw lampshade
     glPushMatrix();
     glTranslatef(0.0f, 3.0f, 0.0f);
     glScalef(1.0f, 1.0f, 1.0f);
     DrawShape(3, 100, 100);
     glPopMatrix();
 
+    //Draw stand
     glPushMatrix();
     glTranslatef(0.0f, 0.1f, 0.0f);
     glScalef(1.0f, 0.2f, 1.0f);
@@ -551,6 +562,7 @@ void display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();    
 
+    //Use draw functions to draw room scene
     glPushMatrix();
     //glRotatef(rot, 0.0f, 1.0f, 0.0f); 
     //DrawShape(2, 200, 200);
@@ -592,6 +604,7 @@ void display()
 
     glutSwapBuffers();
 
+    //Increment rotation variable for fan blades
     if( rot >= 360.0f )
         rot = 0.0f;
 
@@ -601,18 +614,21 @@ void display()
 void myMouse(int button, int state, int x, int y)
 {
   switch (button) {
+     //On left click, zoom out
      case GLUT_LEFT_BUTTON:
         if (state == GLUT_DOWN) {
             viewPos -= 2.0f;
             glutPostRedisplay(); // draw it again
         }
         break;
+     //On middle click, zoom in
      case GLUT_MIDDLE_BUTTON:
         if (state == GLUT_DOWN) {
             viewPos += 2.0f;
             glutPostRedisplay(); // draw it again
         }
         break;
+     //On right click, exit program
      case GLUT_RIGHT_BUTTON:
         if (state == GLUT_DOWN)
            exit (-1);
