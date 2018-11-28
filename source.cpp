@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//define variables for viewport setup
 GLint WIDTH = 800;
 GLint HEIGHT = 800;
 GLfloat fov = 90.0f;
@@ -17,6 +18,7 @@ GLfloat viewPos = 20.0f;
 
 GLfloat rot = 0;
 
+//setup struct to hold vertex data
 struct Vertex
 {
 
@@ -25,6 +27,7 @@ struct Vertex
 
 };
 
+//DrawShape will draw the vertices of one shape depending on the type provided
 void DrawShape(int type, int latDiv, int longDiv)
 {
 
@@ -39,6 +42,7 @@ void DrawShape(int type, int latDiv, int longDiv)
                vertices.push_back(Vertex());
             }
 
+            //define the needed vertices for a cube
             vertices[0].vert[0] = -0.5; vertices[0].vert[1] = -0.5; vertices[0].vert[2] = -0.5;
             vertices[1].vert[0] = -0.5; vertices[1].vert[1] = -0.5; vertices[1].vert[2] = 0.5;
             vertices[2].vert[0] = -0.5; vertices[2].vert[1] = 0.5; vertices[2].vert[2] = 0.5;
@@ -48,6 +52,7 @@ void DrawShape(int type, int latDiv, int longDiv)
             vertices[6].vert[0] = 0.5; vertices[6].vert[1] = 0.5; vertices[6].vert[2] = 0.5;
             vertices[7].vert[0] = 0.5; vertices[7].vert[1] = 0.5; vertices[7].vert[2] = -0.5;
 
+            //draw each side of the cube using the defined vertices
             glBegin(GL_QUADS);
 
             glColor3f( 0.6f, 0.6f, 0.6f );
@@ -317,18 +322,21 @@ void DrawShape(int type, int latDiv, int longDiv)
 
 void DrawWalls(){
 
+    //Floor
     glPushMatrix();
     glScalef(20.0f, 20.0f, 1.0f);
     glTranslatef(0.0f, 0.5f, -10.5f);
     DrawShape(0, 1, 1);
     glPopMatrix();
 
+    //Left wall
     glPushMatrix();
     glScalef(1.0f, 20.0f, 20.0f);
     glTranslatef(-10.5f, 0.5f, 0.0f);
     DrawShape(0, 1, 1);
     glPopMatrix();
 
+    //Right wall
     glPushMatrix();
     glScalef(20.0f, 1.0f, 20.0f);
     glTranslatef(0.0f, 0.5f, 0.0f);
@@ -499,6 +507,7 @@ void DrawLamp(){
 }
 
 void init(){
+    //Initialize render options
     glShadeModel(GL_SMOOTH);
     glClearDepth(1.0f);
     glDepthFunc(GL_LESS);
@@ -508,15 +517,19 @@ void init(){
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_NORMALIZE);
 
+    //define materials properties
     GLfloat mat_ambient [] = {0.7f, 0.7f, 0.7f, 1.0f};
     GLfloat mat_diffuse [] = {0.6f, 0.6f, 0.6f, 1.0f};
     GLfloat mat_specular [] = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat mat_shininess [] = {50.0f};
 
+    //Bind material properties to pipeline
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
     glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+    
+    //Define scene lighting
     GLfloat lightIntensity [] = {0.7f, 0.7f, 0.7f, 1.0f};
     GLfloat light_position [] = {0.0f, 6.0f, 6.0f, 0.0f};
     glLightfv (GL_LIGHT0, GL_POSITION, light_position);
